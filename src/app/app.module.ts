@@ -17,12 +17,16 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { SearchService } from './services/searchService';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,11 +40,13 @@ registerLocaleData(en);
     NzMenuModule,
     NzInputModule,
     NzButtonModule,
-    NzPaginationModule 
+    NzPaginationModule,
+    NzListModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    AppHttpService
+    AppHttpService,
+    SearchService
   ],
   bootstrap: [AppComponent]
 })
