@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
 import { AppHttpService } from 'src/app/services/appHttpService';
 import { SearchService } from 'src/app/services/searchService';
@@ -12,7 +13,8 @@ import { Constants } from 'src/app/utils/constant';
 export class WelcomeComponent implements OnInit, OnDestroy {
   constructor(
     private appService: AppHttpService,
-    public searchService: SearchService
+    public searchService: SearchService,
+    private message: NzMessageService
   ) {}
   resoureceList: any = [];
   currentpage: number = 1;
@@ -35,9 +37,12 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     const URL =
       Constants.API_BASE_URL +
       `${this.appService.currentActiveResouce.key}/${this.searchService.searchKey}/${pageNo}`;
-    this.appService.get(URL).subscribe((data) => {
+    this.appService.get(URL).subscribe((data:any) => {
       this.resoureceList = data;
+      if(data['error']) this.message.create('error', `${data['error']}`)
       this.currentpage = pageNo;
+    },(error)=>{
+      this.message.create('error', `Somthing Went Wrong. `)
     });
   }
 

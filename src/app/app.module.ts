@@ -20,6 +20,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { SearchService } from './services/searchService';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 registerLocaleData(en);
 
@@ -41,7 +42,8 @@ registerLocaleData(en);
     NzInputModule,
     NzButtonModule,
     NzPaginationModule,
-    NzListModule
+    NzListModule,
+    NzMessageModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
