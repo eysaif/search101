@@ -60,10 +60,11 @@
               nzSize="large"
               [nzAddOnAfter]="suffixButton"
             >
-              <input type="text" nz-input placeholder="input search text" />
+              <input [(ngModel)]="searchKey" (ngModelChange)="onInputChange($event)" type="text" nz-input placeholder="Type here to search..." />
             </nz-input-group>
             <ng-template #suffixButton>
-              <button nz-button nzType="primary" nzSize="large" nzSearch>
+              <button [disabled]="!searchKey" nz-button nzType="primary" nzSize="large" nzSearch
+              (click)="onSubmitSearch()">
                 Search
               </button>
             </ng-template></span

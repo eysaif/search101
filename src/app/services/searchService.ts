@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class SearchService{
     public searchEmitter = new Subject();
+    public searchKey = '';
     constructor(){}
 
     triggerSearch(){

@@ -1,6 +1,6 @@
  <div style="height: 100%; overflow-y: scroll;">
     <ul nz-list [nzDataSource]="resoureceList" nzBordered nzSize="large" >
-        <nz-list-header>Header  <nz-pagination [nzPageIndex]="1" [nzTotal]="200" (nzPageIndexChange)="changePageHandler($event)"></nz-pagination></nz-list-header>
+        <nz-list-header>Header  <nz-pagination [nzPageIndex]="currentpage" [nzTotal]="200" (nzPageIndexChange)="changePageHandler($event)" [nzDisabled]="!this.searchService.searchKey"></nz-pagination></nz-list-header>
         <li nz-list-item *ngFor="let item of resoureceList" nzNoFlex>
             <ul nz-list-item-actions>
                 <nz-list-item-action>

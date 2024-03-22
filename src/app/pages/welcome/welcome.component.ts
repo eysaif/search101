@@ -12,19 +12,13 @@ import { Constants } from 'src/app/utils/constant';
 export class WelcomeComponent implements OnInit, OnDestroy {
   constructor(
     private appService: AppHttpService,
-    private searchService: SearchService
+    public searchService: SearchService
   ) {}
   resoureceList: any = [];
   currentpage: number = 1;
   subscription: Subscription = new Subscription();
 
   ngOnInit() {
-    const URL =
-      Constants.API_BASE_URL +
-      `${this.appService.currentActiveResouce.key}/fast`;
-    this.appService.get(URL).subscribe((data) => {
-      this.resoureceList = data;
-    });
     this.subscription.add(
       this.searchService.getSearchState().subscribe(() => {
         this.searchOnChange();
@@ -33,14 +27,17 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
   changePageHandler(pageNo: any) {
     this.currentpage = pageNo;
+    if(this.searchService.searchKey) this.searchOnChange(this.currentpage);
+    
   }
 
-  searchOnChange() {
+  searchOnChange(pageNo = 1) {
     const URL =
       Constants.API_BASE_URL +
-      `${this.appService.currentActiveResouce.key}/fast`;
+      `${this.appService.currentActiveResouce.key}/${this.searchService.searchKey}/${pageNo}`;
     this.appService.get(URL).subscribe((data) => {
       this.resoureceList = data;
+      this.currentpage = pageNo;
     });
   }
 
