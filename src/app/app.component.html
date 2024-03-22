@@ -22,7 +22,10 @@
       <li nz-submenu nzOpen nzTitle="Resources" nzIcon="appstore">
         <ul *ngFor="let item of resoureceList">
           <li
-            [ngStyle]="{ background: item.label == currentActiveResouce.label ? '#1890ff' : '' }"
+            [ngStyle]="{
+              background:
+                item.label == currentActiveResouce.label ? '#1890ff' : ''
+            }"
             nz-menu-item
             nzMatchRouter
             (click)="onClickHandler(item)"
@@ -43,12 +46,28 @@
   <nz-layout>
     <nz-header>
       <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+        <span class="header-trigger">
           <span
             class="trigger"
+            (click)="isCollapsed = !isCollapsed"
             nz-icon
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></span>
+
+          <span>
+            <nz-input-group
+              nzSearch
+              nzSize="large"
+              [nzAddOnAfter]="suffixButton"
+            >
+              <input type="text" nz-input placeholder="input search text" />
+            </nz-input-group>
+            <ng-template #suffixButton>
+              <button nz-button nzType="primary" nzSize="large" nzSearch>
+                Search
+              </button>
+            </ng-template></span
+          >
         </span>
       </div>
     </nz-header>
