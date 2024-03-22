@@ -20,15 +20,14 @@
       [nzInlineCollapsed]="isCollapsed"
     >
       <li nz-submenu nzOpen nzTitle="Resources" nzIcon="appstore">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
+        <ul *ngFor="let item of resoureceList">
+          <li
+            [ngStyle]="{ background: item.label == currentActiveResouce.label ? '#1890ff' : '' }"
+            nz-menu-item
+            nzMatchRouter
+            (click)="onClickHandler(item)"
+          >
+            <a>{{ item.label }}</a>
           </li>
         </ul>
       </li>
