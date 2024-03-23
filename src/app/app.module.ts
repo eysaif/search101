@@ -21,7 +21,9 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { SearchService } from './services/searchService';
 import { NzMessageModule } from 'ng-zorro-antd/message';
-
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 registerLocaleData(en);
 
 @NgModule({
@@ -43,7 +45,10 @@ registerLocaleData(en);
     NzButtonModule,
     NzPaginationModule,
     NzListModule,
-    NzMessageModule
+    NzMessageModule,
+    NzSkeletonModule,
+    NzSpinModule,
+    NzAlertModule 
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
