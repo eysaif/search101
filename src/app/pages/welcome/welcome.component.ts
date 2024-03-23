@@ -29,21 +29,24 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
   changePageHandler(pageNo: any) {
     this.currentpage = pageNo;
-    if(this.searchService.searchKey) this.searchOnChange(this.currentpage);
-    
+    if (this.searchService.searchKey) this.searchOnChange(this.currentpage);
   }
 
   searchOnChange(pageNo = 1) {
+    if(!this.searchService.searchKey) return;
     const URL =
       Constants.API_BASE_URL +
       `${this.appService.currentActiveResouce.key}/${this.searchService.searchKey}/${pageNo}`;
-    this.appService.get(URL).subscribe((data:any) => {
-      this.resoureceList = data;
-      if(data['error']) this.message.create('error', `${data['error']}`)
-      this.currentpage = pageNo;
-    },(error)=>{
-      this.message.create('error', `Somthing Went Wrong. `)
-    });
+    this.appService.get(URL).subscribe(
+      (data: any) => {
+        this.resoureceList = data;
+        if (data['error']) this.message.create('error', `${data['error']}`);
+        this.currentpage = pageNo;
+      },
+      (error) => {
+        this.message.create('error', `Somthing Went Wrong. `);
+      }
+    );
   }
 
   ngOnDestroy() {
