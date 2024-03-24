@@ -19,6 +19,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   resoureceList: any = [];
   currentpage: number = 1;
   isLoading:boolean = false;
+  listType: string = "SIMPLE";
   subscription: Subscription = new Subscription();
 
   ngOnInit() {
@@ -44,7 +45,9 @@ export class WelcomeComponent implements OnInit, OnDestroy {
         this.isLoading=false;
         
         if (data['error']) {this.message.create('error', `${data['error']}`)}
-        else {this.resoureceList = data; }
+        else {this.resoureceList = data; 
+          this.listType = (this.resoureceList.find((item:any)=> item.Files)) ?  "CONTAIN_FILE" : "SIMPLE";
+        }
         this.currentpage = pageNo;
       },
       (error) => {
