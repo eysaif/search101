@@ -57,6 +57,10 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     );
   }
 
+  copyToClipBoard(value:any){
+    navigator.clipboard.writeText(value);
+    this.message.create('success',`Magnet coppied!`);
+  }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
