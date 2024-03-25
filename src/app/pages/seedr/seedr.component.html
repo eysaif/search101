@@ -1,3 +1,10 @@
+<nz-spin nzTip="Loading..." *ngIf="isLoading">
+    <nz-alert
+      nzType="info"
+      nzMessage="Adding the data"
+      nzDescription="Please wait, dont refresh the page."
+    ></nz-alert>
+  </nz-spin>
 <form
   nz-form
   [formGroup]="validateForm"
@@ -20,6 +27,7 @@
     nz-button
     class="login-form-button login-form-margin"
     [nzType]="'primary'"
+    [disabled]="isLoading"
   >
     Add Magnet
   </button>

@@ -20,4 +20,5 @@ export class Constants {
   ];
 
   public static readonly API_BASE_URL='https://search4api.vercel.app/api/';
+  public static readonly SEEDR_API_URL='https://seedr101.vercel.app/api/';
 }

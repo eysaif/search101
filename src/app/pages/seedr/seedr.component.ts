@@ -1,23 +1,34 @@
+import { AppHttpService } from './../../services/appHttpService';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Constants } from 'src/app/utils/constant';
 
 @Component({
   selector: 'app-seedr',
   templateUrl: './seedr.component.html',
-  styleUrls: ['./seedr.component.scss']
+  styleUrls: ['./seedr.component.scss'],
 })
 export class SeedrComponent implements OnInit {
-
   validateForm!: UntypedFormGroup;
-
+  isLoading:boolean = false;
   submitForm(): void {
     if (this.validateForm.valid) {
+      const {
+        password = null,
+        userName = null,
+        mangnet = '',
+      } = { ...this.validateForm.value };
+      localStorage.setItem('pwd', password);
+      localStorage.setItem('usr', userName);
+      this.saveData({usr:userName,pwd:password,mangnet:mangnet});
       console.log('submit', this.validateForm.value);
-      const { password = null, userName =null} = { ...this.validateForm.value}
-      localStorage.setItem("pwd", password);
-      localStorage.setItem("usr", userName);
     } else {
-      Object.values(this.validateForm.controls).forEach(control => {
+      Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
@@ -26,18 +37,35 @@ export class SeedrComponent implements OnInit {
     }
   }
 
-  constructor(private fb: UntypedFormBuilder) {
-  }
+  constructor(
+    private fb: UntypedFormBuilder,
+    private appService: AppHttpService,
+    private message: NzMessageService
+  ) {}
 
+  saveData(data: any) {
+    this.isLoading = true;
+    const URL = Constants.SEEDR_API_URL + `/add`;
+    this.appService.postData(URL, data).subscribe(
+      (response:any) => {
+        console.log(response);
+        this.isLoading = false;
+        this.message.create('success',`Magnet Added Successfuly!`);
+      },
+      (error:any) => {
+        console.log(error);
+        this.isLoading = false;
+        this.message.create('error', `Somthing Went Wrong. `);
+      }
+    );
+  }
   ngOnInit(): void {
-    const pwd = localStorage.getItem("pwd") || null;
-    const usr = localStorage.getItem("usr") || null;
+    const pwd = localStorage.getItem('pwd') || null;
+    const usr = localStorage.getItem('usr') || null;
     this.validateForm = this.fb.group({
       mangnet: [null, [Validators.required]],
       userName: [usr, [Validators.required]],
       password: [pwd, [Validators.required]],
     });
-    
   }
-
 }
