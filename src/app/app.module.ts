@@ -24,12 +24,14 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { HealthstatusDirective } from './directives/healthstatus.directive';
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    HealthstatusDirective
   ],
   imports: [
     BrowserModule,

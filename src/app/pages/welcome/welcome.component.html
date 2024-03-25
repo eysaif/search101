@@ -73,8 +73,8 @@
               <span>
                 Size <strong>{{ item.Size }}</strong></span
               >
-              <span> L :{{ item.Leechers }} </span>
-              <span> S :{{ item.Seeders }} </span>
+              <span class="healthStyle" appHealthstatus [healthValue]="item.Leechers"> L :{{ item.Leechers }} </span>
+              <span class="healthStyle" appHealthstatus [healthValue]="item.Seeders"> S :{{ item.Seeders }} </span>
             </nz-list-item-action>
           </ul>
           <strong style="color: #000000d9"> {{ item.Name }}</strong>
