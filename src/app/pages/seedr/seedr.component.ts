@@ -21,11 +21,11 @@ export class SeedrComponent implements OnInit {
       const {
         password = null,
         userName = null,
-        mangnet = '',
+        magnet = '',
       } = { ...this.validateForm.value };
       localStorage.setItem('pwd', password);
       localStorage.setItem('usr', userName);
-      this.saveData({usr:userName,pwd:password,mangnet:mangnet});
+      this.saveData({usr:userName,pwd:password,magnet:magnet});
       console.log('submit', this.validateForm.value);
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
@@ -63,7 +63,7 @@ export class SeedrComponent implements OnInit {
     const pwd = localStorage.getItem('pwd') || null;
     const usr = localStorage.getItem('usr') || null;
     this.validateForm = this.fb.group({
-      mangnet: [null, [Validators.required]],
+      magnet: [null, [Validators.required]],
       userName: [usr, [Validators.required]],
       password: [pwd, [Validators.required]],
     });
