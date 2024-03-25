@@ -30,14 +30,14 @@
             nzMatchRouter
             (click)="onClickHandler(item)"
           >
-            <a>{{ item.label }}</a>
+            <a [routerLink]="['welcome',item.key]">{{ item.label }}</a>
           </li>
         </ul>
       </li>
       <li nz-submenu nzOpen nzTitle="Seedr" nzIcon="form">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a>Seedrlogin </a>
+            <a routerLink="seedr">Login </a>
           </li>
         </ul>
       </li>

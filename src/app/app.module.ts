@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppHttpService } from './services/appHttpService';
@@ -25,12 +25,15 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { HealthstatusDirective } from './directives/healthstatus.directive';
+import { SeedrComponent } from './pages/seedr/seedr.component';
+import { NzFormModule } from 'ng-zorro-antd/form';
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
+    SeedrComponent,
     HealthstatusDirective
   ],
   imports: [
@@ -38,6 +41,7 @@ registerLocaleData(en);
     AppRoutingModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     IconsProviderModule,
@@ -50,7 +54,8 @@ registerLocaleData(en);
     NzMessageModule,
     NzSkeletonModule,
     NzSpinModule,
-    NzAlertModule 
+    NzAlertModule,
+    NzFormModule 
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
