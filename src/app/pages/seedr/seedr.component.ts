@@ -45,7 +45,7 @@ export class SeedrComponent implements OnInit {
 
   saveData(data: any) {
     this.isLoading = true;
-    const URL = Constants.SEEDR_API_URL + `/add`;
+    const URL = Constants.SEEDR_API_URL + `add`;
     this.appService.postData(URL, data).subscribe(
       (response:any) => {
         console.log(response);
