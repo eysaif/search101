@@ -1,4 +1,8 @@
-<div>
+<div> 
+  <div class="spinnerContainer" *ngIf="isLoading">
+    <nz-spin [nzSize]="'large'">
+    </nz-spin>
+  </div>
   <ng-container [ngSwitch]="listType">
     <ul nz-list [nzDataSource]="resoureceList" nzBordered nzSize="large">
       <nz-list-header>
@@ -10,13 +14,6 @@
           [nzDisabled]="!this.searchService.searchKey"
         ></nz-pagination
       ></nz-list-header>
-      <nz-spin nzTip="Loading..." *ngIf="isLoading">
-        <nz-alert
-          nzType="info"
-          nzMessage="Searching for results"
-          nzDescription="Please wait, dont refresh the page."
-        ></nz-alert>
-      </nz-spin>
       <ng-container *ngSwitchCase="'CONTAIN_FILE'">
         <nz-list-item *ngFor="let item of resoureceList">
           <nz-list-item-meta>
