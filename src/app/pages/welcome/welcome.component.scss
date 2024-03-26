@@ -1,7 +1,7 @@
 .ant-list-bordered.ant-list-lg .ant-list-footer,
 .ant-list-bordered.ant-list-lg .ant-list-header,
 .ant-list-bordered.ant-list-lg .ant-list-item {
-    padding: 16px 24px;
+    padding: 12px 4px;
     display: flex;
     justify-content: space-between;
 }
@@ -12,4 +12,10 @@
     border-radius: 4px;
     font-weight: bold;
     color: white;
+}
+
+.resourceName {
+    margin-right: 8px;
+    font-weight: bold;
+    font-style: italic;
 }
