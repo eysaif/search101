@@ -8,8 +8,11 @@ export class HealthstatusDirective implements OnInit{
   @Input() healthValue = 0;
   ngOnInit(): void {
     (this.healthValue > 5) ?
-    this.rendrer.setStyle(this.element.nativeElement,'background','green'):
+    this.rendrer.setStyle(this.element.nativeElement,'background','#00800082'):
     this.rendrer.setStyle(this.element.nativeElement,'background','red');
+
+    (this.healthValue > 5) ?
+    this.rendrer.setStyle(this.element.nativeElement,'color','#017201fa'): '';
   }
 
 }
