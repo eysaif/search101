@@ -1,18 +1,5 @@
-<nz-layout class="app-layout">
-  <nz-sider
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
-  >
-    <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
-        <h1>Search 101</h1>
-      </a>
-    </div>
+<nz-layout class="layout">
+  <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
     <ul
       nz-menu
       nzTheme="dark"
@@ -30,7 +17,7 @@
             nzMatchRouter
             (click)="onClickHandler(item)"
           >
-            <a [routerLink]="['welcome',item.key]">{{ item.label }}</a>
+            <a [routerLink]="['welcome', item.key]">{{ item.label }}</a>
           </li>
         </ul>
       </li>
@@ -47,35 +34,37 @@
     <nz-header>
       <div class="app-header">
         <span class="header-trigger">
-          <span
-            class="trigger"
-            (click)="isCollapsed = !isCollapsed"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          ></span>
-
-          <span>
-            <nz-input-group
-              nzSearch
+          <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+            <input
+              [(ngModel)]="searchKey"
+              (ngModelChange)="onInputChange($event)"
+              type="text"
+              nz-input
+              placeholder="Type here to search..."
+            />
+          </nz-input-group>
+          <ng-template #suffixButton>
+            <button
+              [disabled]="!searchKey"
+              nz-button
+              nzType="primary"
               nzSize="large"
-              [nzAddOnAfter]="suffixButton"
+              nzSearch
+              (click)="onSubmitSearch()"
             >
-              <input [(ngModel)]="searchKey" (ngModelChange)="onInputChange($event)" type="text" nz-input placeholder="Type here to search..." />
-            </nz-input-group>
-            <ng-template #suffixButton>
-              <button [disabled]="!searchKey" nz-button nzType="primary" nzSize="large" nzSearch
-              (click)="onSubmitSearch()">
-                Search
-              </button>
-            </ng-template></span
-          >
+              Search
+            </button>
+          </ng-template>
         </span>
       </div>
     </nz-header>
     <nz-content>
       <div class="inner-content">
-        <router-outlet></router-outlet>
+        <div class="inner-content">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </nz-content>
+    <nz-footer>Devloped & Design by Shaikh Saifuddin ©2020</nz-footer>
   </nz-layout>
 </nz-layout>
