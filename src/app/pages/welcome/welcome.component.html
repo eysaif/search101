@@ -19,14 +19,13 @@
         <nz-list-item *ngFor="let item of resoureceList">
           <nz-list-item-meta>
             <nz-list-item-meta-avatar>
-              <span
+              <nz-rate
+                style="font-size: x-large"
+                [ngModel]="0"
+                [nzCount]="1"
                 (click)="markFavourite(item)"
-                nz-icon
-                style="font-size: x-large;cursor: pointer;"
-                nzType="star"
-                nzTheme="outline"
-              ></span
-            ></nz-list-item-meta-avatar>
+              ></nz-rate>
+            </nz-list-item-meta-avatar>
             <nz-list-item-meta-title>
               <a style="pointer-events: none">{{ item.Name }}</a>
             </nz-list-item-meta-title>

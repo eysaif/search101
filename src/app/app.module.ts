@@ -28,6 +28,7 @@ import { HealthstatusDirective } from './directives/healthstatus.directive';
 import { SeedrComponent } from './pages/seedr/seedr.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FavouriteComponent } from './pages/favourite/favourite.component';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 registerLocaleData(en);
 
 @NgModule({
@@ -57,7 +58,8 @@ registerLocaleData(en);
     NzSkeletonModule,
     NzSpinModule,
     NzAlertModule,
-    NzFormModule 
+    NzFormModule,
+    NzRateModule 
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
