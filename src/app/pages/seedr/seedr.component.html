@@ -56,29 +56,3 @@
     </nz-form-control>
   </nz-form-item>
 </form>
-<button
-  nz-button
-  nzType="primary"
-  nzSize="small"
-  nzSearch
-  (click)="prevPage()"
-  style="margin: 4px;"
->
-Previous Page 
-</button>
-<strong> Page {{page + 1}} </strong>
-<button
-  nz-button
-  nzType="primary"
-  nzSize="small"
-  nzSearch
-  (click)="nextPage()"
-  style="margin: 4px;"
->
-Next Page 
-</button>
-<div *ngIf="imgData">
-  <ng-container *ngFor="let image of imgData">
-    <img width="300" height="300" [src]="image.path" alt="img" />
-  </ng-container>
-</div>

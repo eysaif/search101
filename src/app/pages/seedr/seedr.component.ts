@@ -16,9 +16,7 @@ import { Constants } from 'src/app/utils/constant';
 export class SeedrComponent implements OnInit {
   validateForm!: UntypedFormGroup;
   isLoading: boolean = false;
-  imgData: any;
-  pageCurrent: number = 0;
-  page: number = 0;
+
   submitForm(): void {
     if (this.validateForm.valid) {
       const {
@@ -68,33 +66,6 @@ export class SeedrComponent implements OnInit {
       userName: [usr, [Validators.required]],
       password: [pwd, [Validators.required]],
     });
-    this.isLoading = true;
-    this.getSavedData();
   }
-
-  nextPage() {
-    this.page++;
-    this.pageCurrent += 2;
-    this.getSavedData(this.pageCurrent);
-  }
-
-  prevPage() {
-    if (this.page == 0) return;
-    this.page--;
-    this.pageCurrent -= 2;
-    this.getSavedData(this.pageCurrent);
-  }
-  getSavedData(page = 0) {
-    this.appService.get(Constants.SEEDR_API_URL + `tor/list/${page}`).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.isLoading = false;
-        if (!data.message) this.imgData = data;
-      },
-      (error) => {
-        this.isLoading = false;
-        this.message.create('error', `Somthing Went Wrong. `);
-      }
-    );
-  }
+ 
 }

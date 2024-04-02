@@ -27,6 +27,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { HealthstatusDirective } from './directives/healthstatus.directive';
 import { SeedrComponent } from './pages/seedr/seedr.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { FavouriteComponent } from './pages/favourite/favourite.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -34,6 +35,7 @@ registerLocaleData(en);
     AppComponent,
     WelcomeComponent,
     SeedrComponent,
+    FavouriteComponent,
     HealthstatusDirective
   ],
   imports: [
