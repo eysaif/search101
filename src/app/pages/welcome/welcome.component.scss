@@ -33,3 +33,11 @@
     justify-content: center;
     background: rgba(20, 20, 20, 0.6);
 }
+
+.ant-list-item-meta {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    max-width: 100%;
+    align-content: center;
+}

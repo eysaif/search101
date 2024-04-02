@@ -1,12 +1,13 @@
-<div> 
+<div>
   <div class="spinnerContainer" *ngIf="isLoading">
-    <nz-spin [nzSize]="'large'">
-    </nz-spin>
+    <nz-spin [nzSize]="'large'"> </nz-spin>
   </div>
   <ng-container [ngSwitch]="listType">
     <ul nz-list [nzDataSource]="resoureceList" nzBordered nzSize="large">
       <nz-list-header>
-       <p class="resourceName">{{ this.appService.currentActiveResouce.label }}</p> 
+        <p class="resourceName">
+          {{ this.appService.currentActiveResouce.label }}
+        </p>
         <nz-pagination
           [nzPageIndex]="currentpage"
           [nzTotal]="500"
@@ -17,8 +18,14 @@
       <ng-container *ngSwitchCase="'CONTAIN_FILE'">
         <nz-list-item *ngFor="let item of resoureceList">
           <nz-list-item-meta>
-            <nz-list-item-meta-avatar
-              [nzSrc]="item.Url || item.Poster"
+            <nz-list-item-meta-avatar>
+              <span
+                (click)="markFavourite(item)"
+                nz-icon
+                style="font-size: x-large;cursor: pointer;"
+                nzType="star"
+                nzTheme="outline"
+              ></span
             ></nz-list-item-meta-avatar>
             <nz-list-item-meta-title>
               <a style="pointer-events: none">{{ item.Name }}</a>
@@ -30,8 +37,7 @@
           <ul nz-list-item-actions *ngIf="item.Files">
             <nz-list-item-action
               ><span *ngIf="item.Files[0]?.Size && item.Files[0]?.Quality"
-                >(Size: {{ item.Files[0].Size }} Q:
-                {{ item.Files[0].Quality }})
+                >(Size: {{ item.Files[0].Size }} Q: {{ item.Files[0].Quality }})
                 <a
                   ><span
                     nz-icon
@@ -39,10 +45,8 @@
                     nzTheme="fill"
                     (click)="copyToClipBoard(item.Files[0].Magnet)"
                   ></span></a></span
-            
               ><span *ngIf="item.Files[1]?.Size && item.Files[1]?.Quality"
-                >(Size: {{ item.Files[1].Size }} Q:
-                {{ item.Files[1].Quality }})
+                >(Size: {{ item.Files[1].Size }} Q: {{ item.Files[1].Quality }})
                 <a
                   ><span
                     nz-icon
@@ -59,18 +63,31 @@
         <li nz-list-item *ngFor="let item of resoureceList" nzNoFlex>
           <ul nz-list-item-actions>
             <nz-list-item-action>
-                <a
+              <a
                 ><span
                   nz-icon
                   nzType="medium-square"
                   nzTheme="fill"
                   (click)="copyToClipBoard(item.Magnet)"
-                ></span></a>
+                ></span
+              ></a>
               <span>
                 Size <strong>{{ item.Size }}</strong></span
               >
-              <span class="healthStyle" appHealthstatus [healthValue]="item.Leechers"> L :{{ item.Leechers }} </span>
-              <span class="healthStyle" appHealthstatus [healthValue]="item.Seeders"> S :{{ item.Seeders }} </span>
+              <span
+                class="healthStyle"
+                appHealthstatus
+                [healthValue]="item.Leechers"
+              >
+                L :{{ item.Leechers }}
+              </span>
+              <span
+                class="healthStyle"
+                appHealthstatus
+                [healthValue]="item.Seeders"
+              >
+                S :{{ item.Seeders }}
+              </span>
             </nz-list-item-action>
           </ul>
           <strong style="color: #000000d9"> {{ item.Name }}</strong>

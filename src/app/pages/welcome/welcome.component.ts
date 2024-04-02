@@ -18,8 +18,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   ) {}
   resoureceList: any = [];
   currentpage: number = 1;
-  isLoading:boolean = false;
-  listType: string = "SIMPLE";
+  isLoading: boolean = false;
+  listType: string = 'SIMPLE';
   subscription: Subscription = new Subscription();
 
   ngOnInit() {
@@ -35,31 +35,43 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   searchOnChange(pageNo = 1) {
-    if(!this.searchService.searchKey) return;
-    this.isLoading=true;
+    if (!this.searchService.searchKey) return;
+    this.isLoading = true;
     const URL =
       Constants.API_BASE_URL +
       `${this.appService.currentActiveResouce.key}/${this.searchService.searchKey}/${pageNo}`;
     this.appService.get(URL).subscribe(
       (data: any) => {
-        this.isLoading=false;
-        
-        if (data['error']) {this.message.create('error', `${data['error']}`)}
-        else {this.resoureceList = data; 
-          this.listType = (this.resoureceList.find((item:any)=> item.Files)) ?  "CONTAIN_FILE" : "SIMPLE";
+        this.isLoading = false;
+
+        if (data['error']) {
+          this.message.create('error', `${data['error']}`);
+        } else {
+          this.resoureceList = data;
+          this.listType = this.resoureceList.find((item: any) => item.Files)
+            ? 'CONTAIN_FILE'
+            : 'SIMPLE';
         }
         this.currentpage = pageNo;
       },
       (error) => {
-        this.isLoading=false;
+        this.isLoading = false;
         this.message.create('error', `Somthing Went Wrong. `);
       }
     );
   }
 
-  copyToClipBoard(value:any){
+  copyToClipBoard(value: any) {
     navigator.clipboard.writeText(value);
-    this.message.create('success',`Magnet coppied!`);
+    this.message.create('success', `Magnet coppied!`);
+  }
+
+  markFavourite(item: any) {
+    console.log(item);
+    this.appService.postData(Constants.SEEDR_API_URL + `tor/add`, item).subscribe({
+      next: (response) => this.message.create('success', `Added in favourite!`),
+      error: (error) => this.message.create('error', `Error Occured!`),
+    });
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
