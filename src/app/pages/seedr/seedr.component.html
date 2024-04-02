@@ -1,10 +1,10 @@
 <nz-spin nzTip="Loading..." *ngIf="isLoading">
-    <nz-alert
-      nzType="info"
-      nzMessage="Adding the data"
-      nzDescription="Please wait, dont refresh the page."
-    ></nz-alert>
-  </nz-spin>
+  <nz-alert
+    nzType="info"
+    nzMessage="Adding the data"
+    nzDescription="Please wait, dont refresh the page."
+  ></nz-alert>
+</nz-spin>
 <form
   nz-form
   [formGroup]="validateForm"
@@ -56,3 +56,8 @@
     </nz-form-control>
   </nz-form-item>
 </form>
+<div *ngIf="imgData">
+  <ng-container *ngFor="let image of imgData">
+    <img width="300" height="300" [src]="image.path" alt="img">
+  </ng-container>
+</div>

@@ -15,7 +15,8 @@ import { Constants } from 'src/app/utils/constant';
 })
 export class SeedrComponent implements OnInit {
   validateForm!: UntypedFormGroup;
-  isLoading:boolean = false;
+  isLoading: boolean = false;
+  imgData: any;
   submitForm(): void {
     if (this.validateForm.valid) {
       const {
@@ -25,8 +26,7 @@ export class SeedrComponent implements OnInit {
       } = { ...this.validateForm.value };
       localStorage.setItem('pwd', password);
       localStorage.setItem('usr', userName);
-      this.saveData({usr:userName,pwd:password,magnet:magnet});
-      console.log('submit', this.validateForm.value);
+      this.saveData({ usr: userName, pwd: password, magnet: magnet });
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -45,14 +45,13 @@ export class SeedrComponent implements OnInit {
 
   saveData(data: any) {
     this.isLoading = true;
-    const URL = Constants.SEEDR_API_URL + `add`;
+    const URL = Constants.SEEDR_API_URL + `seedr/add`;
     this.appService.postData(URL, data).subscribe(
-      (response:any) => {
-        console.log(response);
+      (response: any) => {
         this.isLoading = false;
-        this.message.create('success',`Magnet Added Successfuly!`);
+        this.message.create('success', `Magnet Added Successfuly!`);
       },
-      (error:any) => {
+      (error: any) => {
         console.log(error);
         this.isLoading = false;
         this.message.create('error', `Somthing Went Wrong. `);
@@ -67,5 +66,16 @@ export class SeedrComponent implements OnInit {
       userName: [usr, [Validators.required]],
       password: [pwd, [Validators.required]],
     });
+    this.isLoading = true;
+    this.appService
+      .get(Constants.SEEDR_API_URL + `tor/list`)
+      .subscribe((data: any) => {
+        console.log(data);
+        this.isLoading = false;
+        this.imgData = data;
+      },(error)=>{
+        this.isLoading = false;
+        this.message.create('error', `Somthing Went Wrong. `);
+      });
   }
 }
