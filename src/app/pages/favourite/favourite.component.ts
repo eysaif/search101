@@ -36,7 +36,7 @@ export class FavouriteComponent implements OnInit {
     this.getSavedData();
   }
   nextPage(value: any) {
-    const skipCount = (value - 1) * 5;
+    const skipCount = (value - 1) * 6;
     this.getSavedData(skipCount);
   }
 
@@ -57,10 +57,13 @@ export class FavouriteComponent implements OnInit {
   actionHandler(data: any, action: string) {
     switch (action) {
       case 'delete':
-        const URL = Constants.SEEDR_API_URL + `seedr/tor/delete`;
+        const URL = Constants.SEEDR_API_URL + `tor/delete`;
         this.appService.postData(URL, data).subscribe({
           next: (response: any) => {
             this.isLoading = false;
+            this.imgData = this.imgData.filter(
+              (item: any) => item._id != data._id
+            );
             this.message.info('Deleted successfully');
           },
           error: (error: any) => {
