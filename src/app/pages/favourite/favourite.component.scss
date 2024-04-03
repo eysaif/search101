@@ -1,7 +1,10 @@
-.imgContainer{
+.imgContainer, .paginatorContainer{
     display: flex;
     flex-wrap: wrap;
     margin: 0.5rem;
     padding: 0.2rem;
+}
 
+.paginatorContainer{
+    justify-content: center;
 }

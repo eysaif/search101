@@ -5,27 +5,13 @@
     nzDescription="Please wait, dont refresh the page."
   ></nz-alert>
 </nz-spin>
-<button
-  nz-button
-  nzType="primary"
-  nzSize="small"
-  nzSearch
-  (click)="prevPage()"
-  style="margin: 4px"
->
-  Previous Page
-</button>
-<strong> Page {{ page + 1 }} </strong>
-<button
-  nz-button
-  nzType="primary"
-  nzSize="small"
-  nzSearch
-  (click)="nextPage()"
-  style="margin: 4px"
->
-  Next Page
-</button>
+<div class="paginatorContainer">
+  <nz-pagination
+    [nzPageIndex]="page"
+    [nzTotal]="500"
+    (nzPageIndexChange)="nextPage($event)"
+  ></nz-pagination>
+</div>
 
 <div *ngIf="imgData" class="imgContainer">
   <ng-container *ngFor="let image of imgData">

@@ -17,8 +17,7 @@ interface dialogModel {
 })
 export class FavouriteComponent implements OnInit {
   imgData: any;
-  pageCurrent: number = 0;
-  page: number = 0;
+  page: number = 1;
   isLoading: boolean = false;
   dialogModel: dialogModel = {
     isVisible: false,
@@ -36,18 +35,11 @@ export class FavouriteComponent implements OnInit {
   ngOnInit(): void {
     this.getSavedData();
   }
-  nextPage() {
-    this.page++;
-    this.pageCurrent += 2;
-    this.getSavedData(this.pageCurrent);
+  nextPage(value: any) {
+    const skipCount = (value - 1) * 5;
+    this.getSavedData(skipCount);
   }
 
-  prevPage() {
-    if (this.page == 0) return;
-    this.page--;
-    this.pageCurrent -= 2;
-    this.getSavedData(this.pageCurrent);
-  }
   getSavedData(page = 0) {
     this.isLoading = true;
     this.appService.get(Constants.SEEDR_API_URL + `tor/list/${page}`).subscribe(
