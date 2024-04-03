@@ -27,7 +27,7 @@
               ></nz-rate>
             </nz-list-item-meta-avatar>
             <nz-list-item-meta-title>
-              <a style="pointer-events: none">{{ item.Name }}</a>
+              <a style="pointer-events: none">{{ item.Name | textmodifier}}</a>
             </nz-list-item-meta-title>
             <nz-list-item-meta-description>
               [ {{ item.Genre }} ] : <span>Lang.: {{ item.Language }}</span>
@@ -89,7 +89,7 @@
               </span>
             </nz-list-item-action>
           </ul>
-          <strong style="color: #000000d9"> {{ item.Name }}</strong>
+          <strong style="color: #000000d9"> {{ item.Name | textmodifier}}</strong>
           <span *ngIf="item.Category">[{{ item.Category }}]</span>
         </li>
       </ng-container>

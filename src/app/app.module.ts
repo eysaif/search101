@@ -29,6 +29,7 @@ import { SeedrComponent } from './pages/seedr/seedr.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FavouriteComponent } from './pages/favourite/favourite.component';
 import { NzRateModule } from 'ng-zorro-antd/rate';
+import { TextmodifierPipe } from './pipes/textmodifier.pipe';
 registerLocaleData(en);
 
 @NgModule({
@@ -37,7 +38,8 @@ registerLocaleData(en);
     WelcomeComponent,
     SeedrComponent,
     FavouriteComponent,
-    HealthstatusDirective
+    HealthstatusDirective,
+    TextmodifierPipe
   ],
   imports: [
     BrowserModule,
