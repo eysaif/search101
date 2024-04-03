@@ -45,4 +45,24 @@ export class FavouriteComponent implements OnInit {
       }
     );
   }
+
+  actionHandler(data: any, action: string) {
+    switch (action) {
+      case 'delete':
+        console.log(data, action);
+        this.message.info('Deleted successfully');
+        break;
+      case 'copyLink':
+        navigator.clipboard.writeText(data);
+        this.message.create('success', `Magnet coppied!`);
+        console.log(data, action);
+        break;
+      case 'more':
+        console.log(data, action);
+        break;
+      case 'cancel':
+        console.log(data, action);
+        break;
+    }
+  }
 }

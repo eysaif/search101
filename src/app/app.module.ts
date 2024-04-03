@@ -31,6 +31,8 @@ import { FavouriteComponent } from './pages/favourite/favourite.component';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+
 import { TextmodifierPipe } from './pipes/textmodifier.pipe';
 registerLocaleData(en);
 
@@ -65,7 +67,8 @@ registerLocaleData(en);
     NzFormModule,
     NzRateModule,
     NzCardModule,
-    NzAvatarModule 
+    NzAvatarModule,
+    NzPopconfirmModule 
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

@@ -46,16 +46,39 @@
       <img alt="poster" [src]="image.path" />
     </ng-template>
     <ng-template #actionDelete>
-      <span nz-icon nzType="delete"></span>
+      <a
+        nz-popconfirm
+        nzPopconfirmTitle="Are you sure?"
+        nzOkText="ok"
+        nzCancelText="cancel"
+        (nzOnConfirm)="actionHandler(image, 'delete')"
+        (nzOnCancel)="actionHandler('', 'cancel')"
+      >
+        <span nz-icon nzType="delete"> </span>
+      </a>
     </ng-template>
     <ng-template #actionLink>
-      <span nz-icon nzType="link"></span>
+      <span
+        *ngIf="image.Files[0]"
+        nz-icon
+        nzType="link"
+        (click)="actionHandler(image.Files[0].Magnet, 'copyLink')"
+      ></span>
     </ng-template>
     <ng-template #actionLink2>
-      <span nz-icon nzType="link"></span>
+      <span
+        *ngIf="image.Files[1]"
+        nz-icon
+        nzType="link"
+        (click)="actionHandler(image.Files[1].Magnet, 'copyLink')"
+      ></span>
     </ng-template>
     <ng-template #actionSeeder>
-      <span nz-icon nzType="ellipsis"></span>
+      <span
+        nz-icon
+        nzType="ellipsis"
+        (click)="actionHandler(image, 'more')"
+      ></span>
     </ng-template>
   </ng-container>
 </div>
