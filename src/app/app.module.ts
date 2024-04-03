@@ -32,8 +32,10 @@ import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { TextmodifierPipe } from './pipes/textmodifier.pipe';
+import { StorageService } from './services/storage.service';
 registerLocaleData(en);
 
 @NgModule({
@@ -43,7 +45,7 @@ registerLocaleData(en);
     SeedrComponent,
     FavouriteComponent,
     HealthstatusDirective,
-    TextmodifierPipe
+    TextmodifierPipe,
   ],
   imports: [
     BrowserModule,
@@ -68,13 +70,16 @@ registerLocaleData(en);
     NzRateModule,
     NzCardModule,
     NzAvatarModule,
-    NzPopconfirmModule 
+    NzPopconfirmModule,
+    NzModalModule,
+    NzRadioModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     AppHttpService,
-    SearchService
+    SearchService,
+    StorageService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

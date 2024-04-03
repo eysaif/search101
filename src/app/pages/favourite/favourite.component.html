@@ -1,3 +1,10 @@
+<nz-spin nzTip="Loading..." *ngIf="isLoading">
+  <nz-alert
+    nzType="info"
+    nzMessage="Loading the data"
+    nzDescription="Please wait, dont refresh the page."
+  ></nz-alert>
+</nz-spin>
 <button
   nz-button
   nzType="primary"
@@ -19,13 +26,7 @@
 >
   Next Page
 </button>
-<nz-spin nzTip="Loading..." *ngIf="isLoading">
-  <nz-alert
-    nzType="info"
-    nzMessage="Loading the data"
-    nzDescription="Please wait, dont refresh the page."
-  ></nz-alert>
-</nz-spin>
+
 <div *ngIf="imgData" class="imgContainer">
   <ng-container *ngFor="let image of imgData">
     <nz-card
@@ -80,5 +81,21 @@
         (click)="actionHandler(image, 'more')"
       ></span>
     </ng-template>
+
+    <nz-modal
+      [(nzVisible)]="dialogModel.isVisible"
+      nzTitle="{{ dialogModel.headingText }}"
+      (nzOnCancel)="handleCancel()"
+      (nzOnOk)="handleOk()"
+      nzOkText="{{ dialogModel.okText }}"
+    >
+      <ng-container *nzModalContent>
+        Quality :
+        <nz-radio-group [(ngModel)]="dialogModel.contentValue">
+          <label nz-radio nzValue="{{ image.Files[0].Magnet }}">720</label>
+          <label nz-radio nzValue="{{ image.Files[1].Magnet }}">180</label>
+        </nz-radio-group>
+      </ng-container>
+    </nz-modal>
   </ng-container>
 </div>
