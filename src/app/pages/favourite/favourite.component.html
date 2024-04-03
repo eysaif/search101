@@ -20,14 +20,42 @@
   Next Page
 </button>
 <nz-spin nzTip="Loading..." *ngIf="isLoading">
-    <nz-alert
-      nzType="info"
-      nzMessage="Loading the data"
-      nzDescription="Please wait, dont refresh the page."
-    ></nz-alert>
-  </nz-spin>
-<div *ngIf="imgData">
+  <nz-alert
+    nzType="info"
+    nzMessage="Loading the data"
+    nzDescription="Please wait, dont refresh the page."
+  ></nz-alert>
+</nz-spin>
+<div *ngIf="imgData" class="imgContainer">
   <ng-container *ngFor="let image of imgData">
-    <img width="300" height="300" [src]="image.path" alt="img" />
+    <nz-card
+      style="width: 250px; margin: 0.5rem; border: 1px solid #9d8f9d63"
+      [nzCover]="poster"
+      [nzBorderless]="true"
+      [nzActions]="[actionDelete, actionLink, actionLink2, actionSeeder]"
+    >
+      <nz-card-meta
+        nzTitle="{{ image.Name }}"
+        nzDescription="HD: {{ image?.Files[0]?.Size }} | UHD: {{
+          image?.Files[1]?.Size
+        }}"
+      ></nz-card-meta>
+    </nz-card>
+
+    <ng-template #poster>
+      <img alt="poster" [src]="image.path" />
+    </ng-template>
+    <ng-template #actionDelete>
+      <span nz-icon nzType="delete"></span>
+    </ng-template>
+    <ng-template #actionLink>
+      <span nz-icon nzType="link"></span>
+    </ng-template>
+    <ng-template #actionLink2>
+      <span nz-icon nzType="link"></span>
+    </ng-template>
+    <ng-template #actionSeeder>
+      <span nz-icon nzType="ellipsis"></span>
+    </ng-template>
   </ng-container>
 </div>

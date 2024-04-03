@@ -29,6 +29,8 @@ import { SeedrComponent } from './pages/seedr/seedr.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FavouriteComponent } from './pages/favourite/favourite.component';
 import { NzRateModule } from 'ng-zorro-antd/rate';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { TextmodifierPipe } from './pipes/textmodifier.pipe';
 registerLocaleData(en);
 
@@ -61,7 +63,9 @@ registerLocaleData(en);
     NzSpinModule,
     NzAlertModule,
     NzFormModule,
-    NzRateModule 
+    NzRateModule,
+    NzCardModule,
+    NzAvatarModule 
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
