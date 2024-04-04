@@ -1,87 +1,50 @@
 <nz-spin nzTip="Loading..." *ngIf="isLoading">
-  <nz-alert
-    nzType="info"
-    nzMessage="Loading the data"
-    nzDescription="Please wait, dont refresh the page."
-  ></nz-alert>
+  <nz-alert nzType="info" nzMessage="Loading the data" nzDescription="Please wait, dont refresh the page."></nz-alert>
 </nz-spin>
 <div class="paginatorContainer">
-  <nz-pagination
-    [nzPageIndex]="page"
-    [nzTotal]="500"
-    (nzPageIndexChange)="nextPage($event)"
-  ></nz-pagination>
+  <nz-pagination [nzPageIndex]="page" [nzTotal]="500" (nzPageIndexChange)="nextPage($event)"></nz-pagination>
 </div>
 
 <div *ngIf="imgData" class="imgContainer">
   <ng-container *ngFor="let image of imgData">
-    <nz-card
-      style="width: 300px; margin: 0.5rem; border: 1px solid #9d8f9d63;"
-      [nzCover]="poster"
-      [nzBorderless]="true"
-      [nzActions]="[actionDelete, actionLink, actionLink2, actionSeeder]"
-    >
-      <nz-card-meta
-        nzTitle="{{ image.Name }}"
-        nzDescription="HD: {{ image?.Files[0]?.Size }} | UHD: {{
+    <nz-card style="width: 300px; margin: 0.5rem; border: 1px solid #9d8f9d63;" [nzCover]="poster" [nzBorderless]="true"
+      [nzActions]="[actionDelete, actionLink, actionLink2, actionSeeder]">
+      <nz-card-meta nzTitle="{{ image.Name }}" nzDescription="HD: {{ image?.Files[0]?.Size }} | UHD: {{
           image?.Files[1]?.Size
-        }}"
-      ></nz-card-meta>
+        }}"></nz-card-meta>
     </nz-card>
 
     <ng-template #poster>
       <img alt="poster" [src]="image.path" />
     </ng-template>
     <ng-template #actionDelete>
-      <a
-        nz-popconfirm
-        nzPopconfirmTitle="Are you sure?"
-        nzOkText="ok"
-        nzCancelText="cancel"
-        (nzOnConfirm)="actionHandler(image, 'delete')"
-        (nzOnCancel)="actionHandler('', 'cancel')"
-      >
+      <a nz-popconfirm nzPopconfirmTitle="Are you sure?" nzOkText="ok" nzCancelText="cancel"
+        (nzOnConfirm)="actionHandler(image, 'delete')" (nzOnCancel)="actionHandler('', 'cancel')">
         <span nz-icon nzType="delete"> </span>
       </a>
     </ng-template>
     <ng-template #actionLink>
-      <span
-        *ngIf="image.Files[0]"
-        nz-icon
-        nzType="link"
-        (click)="actionHandler(image.Files[0].Magnet, 'copyLink')"
-      ></span>
+      <span *ngIf="image.Files[0]" nz-icon nzType="link"
+        (click)="actionHandler(image.Files[0].Magnet, 'copyLink')"></span>
     </ng-template>
     <ng-template #actionLink2>
-      <span
-        *ngIf="image.Files[1]"
-        nz-icon
-        nzType="link"
-        (click)="actionHandler(image.Files[1].Magnet, 'copyLink')"
-      ></span>
+      <span *ngIf="image.Files[1]" nz-icon nzType="link"
+        (click)="actionHandler(image.Files[1].Magnet, 'copyLink')"></span>
     </ng-template>
     <ng-template #actionSeeder>
-      <span
-        nz-icon
-        nzType="ellipsis"
-        (click)="actionHandler(image, 'more')"
-      ></span>
+      <span nz-icon nzType="ellipsis" (click)="actionHandler(image, 'more')"></span>
     </ng-template>
 
-    <nz-modal
-      [(nzVisible)]="dialogModel.isVisible"
-      nzTitle="{{ dialogModel.headingText }}"
-      (nzOnCancel)="handleCancel()"
-      (nzOnOk)="handleOk()"
-      nzOkText="{{ dialogModel.okText }}"
-    >
-      <ng-container *nzModalContent>
-        Quality :
-        <nz-radio-group [(ngModel)]="dialogModel.contentValue">
-          <label nz-radio nzValue="{{ image.Files[0].Magnet }}">720</label>
-          <label nz-radio nzValue="{{ image.Files[1].Magnet }}">180</label>
-        </nz-radio-group>
-      </ng-container>
-    </nz-modal>
   </ng-container>
+
+  <nz-modal [(nzVisible)]="dialogModel.isVisible" nzTitle="{{ dialogModel.headingText }}" (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleOk()" nzOkText="{{ dialogModel.okText }}">
+    <ng-container *nzModalContent>
+      Quality :
+      <nz-radio-group [(ngModel)]="dialogModel.contentValue">
+        <label nz-radio nzValue="{{ dialogModel.options[0].Magnet }}">720</label>
+        <label nz-radio nzValue="{{ dialogModel.options[1].Magnet }}">180</label>
+      </nz-radio-group>
+    </ng-container>
+  </nz-modal>
 </div>

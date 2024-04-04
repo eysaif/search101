@@ -8,6 +8,7 @@ interface dialogModel {
   isVisible: boolean;
   headingText: string;
   contentValue: string;
+  options: any;
   okText: string;
 }
 @Component({
@@ -22,6 +23,7 @@ export class FavouriteComponent implements OnInit {
   dialogModel: dialogModel = {
     isVisible: false,
     headingText: '',
+    options:[],
     contentValue: '',
     okText: 'Add magnet',
   };
@@ -80,6 +82,7 @@ export class FavouriteComponent implements OnInit {
       case 'more':
         this.dialogModel.headingText = `Add ${data.Name} ?`;
         this.dialogModel.isVisible = true;
+        this.dialogModel.options=data.Files
         break;
       case 'cancel':
         break;
@@ -103,6 +106,7 @@ export class FavouriteComponent implements OnInit {
 
   handleCancel(): void {
     this.dialogModel.isVisible = false;
+    this.dialogModel.options=[];
     this.dialogModel.contentValue = '';
   }
   saveData(data: any) {
@@ -110,6 +114,7 @@ export class FavouriteComponent implements OnInit {
     this.appService.postData(URL, data).subscribe(
       (response: any) => {
         this.isLoading = false;
+        this.dialogModel.options=[];
         this.message.create('success', `Magnet Added Successfuly!`);
       },
       (error: any) => {
