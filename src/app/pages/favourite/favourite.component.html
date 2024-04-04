@@ -40,10 +40,10 @@
   <nz-modal [(nzVisible)]="dialogModel.isVisible" nzTitle="{{ dialogModel.headingText }}" (nzOnCancel)="handleCancel()"
     (nzOnOk)="handleOk()" nzOkText="{{ dialogModel.okText }}">
     <ng-container *nzModalContent>
-      Quality :
       <nz-radio-group [(ngModel)]="dialogModel.contentValue">
-        <label nz-radio nzValue="{{ dialogModel.options[0].Magnet }}">720</label>
-        <label nz-radio nzValue="{{ dialogModel.options[1].Magnet }}">180</label>
+        <ng-container *ngFor="let item of dialogModel.options">
+          <label nz-radio nzValue="{{ item.Magnet }}"><strong> {{item.Quality}}</strong> Size:({{item.Size}})</label>
+        </ng-container>
       </nz-radio-group>
     </ng-container>
   </nz-modal>
