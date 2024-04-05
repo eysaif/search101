@@ -11,12 +11,12 @@ export class AppComponent {
   isCollapsed = false;
   currentActiveResouce = { label: '1337x', key: '1337x' };
   resoureceList = Constants.TOR_SUB_MENU;
-  searchKey = '';
+  searchKey = "";
   constructor(
     private appService: AppHttpService,
     private searchService: SearchService
   ) {
-    this.searchKey = this.searchService.searchKey;
+    this.searchKey=this.searchService.searchKey;
   }
 
   onClickHandler(newValue: any) {
@@ -25,12 +25,13 @@ export class AppComponent {
     this.searchService.triggerSearch();
   }
 
-  onInputChange(value: string) {
-    this.searchService.searchKey = value;
+  onInputChange(value:string){
+    this.searchService.searchKey=value;
     console.log(value);
   }
 
-  onSubmitSearch() {
+  onSubmitSearch(){
+    
     this.searchService.triggerSearch();
   }
 }
