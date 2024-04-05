@@ -1,23 +1,10 @@
 <nz-layout class="layout">
   <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
     <div class="logo">Search 101</div>
-    <ul
-      nz-menu
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed"
-    >
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzOpen nzTitle="Resources" nzIcon="appstore">
         <ul *ngFor="let item of resoureceList">
-          <li
-            [ngStyle]="{
-              background:
-                item.label == currentActiveResouce.label ? '#1890ff' : ''
-            }"
-            nz-menu-item
-            nzMatchRouter
-            (click)="onClickHandler(item)"
-          >
+          <li nz-menu-item nzMatchRouter (click)="onClickHandler(item)">
             <a [routerLink]="['welcome', item.key]">{{ item.label }}</a>
           </li>
         </ul>
@@ -43,23 +30,12 @@
       <div class="app-header">
         <span class="header-trigger">
           <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-            <input
-              [(ngModel)]="searchKey"
-              (ngModelChange)="onInputChange($event)"
-              type="text"
-              nz-input
-              placeholder="Type here to search..."
-            />
+            <input [(ngModel)]="searchKey" (ngModelChange)="onInputChange($event)" type="text" nz-input
+              placeholder="Type here to search..." />
           </nz-input-group>
           <ng-template #suffixButton>
-            <button
-              [disabled]="!searchKey"
-              nz-button
-              nzType="primary"
-              nzSize="large"
-              nzSearch
-              (click)="onSubmitSearch()"
-            >
+            <button [disabled]="!searchKey" nz-button nzType="primary" nzSize="large" nzSearch
+              (click)="onSubmitSearch()">
               Search
             </button>
           </ng-template>
@@ -69,7 +45,7 @@
     <nz-content>
       <div class="inner-content">
         <div class="inner-content">
-          <router-outlet></router-outlet>
+          <router-outlet (activate)="childResourceUpdated($event)"></router-outlet>
         </div>
       </div>
     </nz-content>

@@ -9,14 +9,14 @@ import { SearchService } from './services/searchService';
 })
 export class AppComponent {
   isCollapsed = false;
-  currentActiveResouce = { label: '1337x', key: '1337x' };
+  currentActiveResouce: any = { label: '1337x', key: '1337x' };
   resoureceList = Constants.TOR_SUB_MENU;
-  searchKey = "";
+  searchKey = '';
   constructor(
     private appService: AppHttpService,
     private searchService: SearchService
   ) {
-    this.searchKey=this.searchService.searchKey;
+    this.searchKey = this.searchService.searchKey;
   }
 
   onClickHandler(newValue: any) {
@@ -25,13 +25,23 @@ export class AppComponent {
     this.searchService.triggerSearch();
   }
 
-  onInputChange(value:string){
-    this.searchService.searchKey=value;
+  onInputChange(value: string) {
+    this.searchService.searchKey = value;
     console.log(value);
   }
 
-  onSubmitSearch(){
-    
+  onSubmitSearch() {
     this.searchService.triggerSearch();
+  }
+
+  childResourceUpdated(componentRef: any) {
+    componentRef.resourceUpdated.subscribe({
+      next: (data: any) => {
+        this.currentActiveResouce = this.resoureceList.find(
+          (item) => item.key == data.key
+        );
+        this.appService.currentActiveResouce = this.currentActiveResouce;
+      },
+    });
   }
 }

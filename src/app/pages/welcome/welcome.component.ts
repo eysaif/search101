@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
 import { AppHttpService } from 'src/app/services/appHttpService';
@@ -11,10 +12,12 @@ import { Constants } from 'src/app/utils/constant';
   styleUrls: ['./welcome.component.scss'],
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
+  @Output() resourceUpdated = new EventEmitter();
   constructor(
     public appService: AppHttpService,
     public searchService: SearchService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private route: Router
   ) {}
   resoureceList: any = [];
   currentpage: number = 1;
@@ -23,6 +26,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   ngOnInit() {
+    const newKey = this.route.url.split("welcome/")[1];
+    if(newKey) this.resourceUpdated.emit({key:newKey});
     this.subscription.add(
       this.searchService.getSearchState().subscribe(() => {
         this.searchOnChange();
